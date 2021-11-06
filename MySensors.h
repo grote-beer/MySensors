@@ -196,9 +196,7 @@ MY_DEFAULT_RX_LED_PIN in your sketch instead to enable LEDs
 
 // GATEWAY - COMMON FUNCTIONS
 // We support MQTT Client using W5100, ESP8266, GSM modems supported by TinyGSM library and Linux
-#if !defined(MY_GATEWAY_CLIENT_MODE) && !defined(MY_GATEWAY_TINYGSM)
-#error You must specify MY_CONTROLLER_IP_ADDRESS or MY_CONTROLLER_URL_ADDRESS
-#endif
+
 
 #if defined(MY_GATEWAY_TINYGSM) && !defined(MY_GATEWAY_MQTT_CLIENT)
 // TinyGSM currently only supports MQTTClient mode.
@@ -218,7 +216,11 @@ MY_DEFAULT_RX_LED_PIN in your sketch instead to enable LEDs
 #include "hal/architecture/Linux/drivers/core/IPAddress.h"
 #endif
 #include "drivers/PubSubClient/PubSubClient.cpp"
+#if defined(CJV_TRANSPORT)
+#include "core/MyGatewayTransportCJV.cpp"
+#else
 #include "core/MyGatewayTransportMQTTClient.cpp"
+#endif
 #elif defined(MY_GATEWAY_FEATURE)
 // GATEWAY - COMMON FUNCTIONS
 #include "core/MyGatewayTransport.cpp"

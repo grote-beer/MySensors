@@ -22,7 +22,9 @@
 #include <SPI.h>
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
-#include <EEPROM.h>
+#ifndef ESP_EEPROM_h
+	#include <EEPROM.h>
+#endif
 
 #ifdef __cplusplus
 #include <Arduino.h>
